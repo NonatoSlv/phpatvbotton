@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX com PHP</title>
+</head>
+<body>
+  <h2>Atividade PHP e JSON</h2>
+  <button id="botao">Mostrar Requisição</button>
+
+  <div id="resposta" style="margin-top:20px;"></div>
+
+  <script>
+    document.getElementById('botao').addEventListener('click', function() {
+      
+      fetch('servidor.php')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Resposta do servidor:', data); 
+
+         
+          document.getElementById('resposta').innerHTML = `
+            <p><strong>Nome:</strong> ${data.nome}</p>
+            <p><strong>Idade:</strong> ${data.idade}</p>
+            <p><strong>Cidade:</strong> ${data.cidade}</p>
+            <p><strong>Nascimento:</strong> ${data.nascimento}</p>
+            <p><strong>Altura:</strong> ${data.altura}</p>
+            <p><strong>Peso:</strong> ${data.peso}</p>
+
+          `;
+        })
+        .catch(error => {
+          console.error('Erro na requisição:', error);
+        });
+    });
+  </script>
+</body>
+</html>
